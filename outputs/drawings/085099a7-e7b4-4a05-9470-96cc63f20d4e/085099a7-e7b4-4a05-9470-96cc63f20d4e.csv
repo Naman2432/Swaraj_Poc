@@ -1,0 +1,20 @@
+Filename,Record Type,drawing_analysis_component_type,drawing_analysis_views_description,drawing_analysis_views_elements,drawing_analysis_views_elements_dimensions_depth,drawing_analysis_views_elements_dimensions_width,drawing_analysis_views_elements_feature,drawing_analysis_views_elements_location,drawing_analysis_views_elements_note,drawing_analysis_views_elements_scale,drawing_analysis_views_elements_subtype,drawing_analysis_views_elements_type,drawing_analysis_views_elements_units,drawing_analysis_views_elements_value,drawing_analysis_views_scale,drawing_analysis_views_view_name
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,File Info,Gear,,,,,,,,,,,,,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 1,,,,,,Gear Outer Diameter (OD of teeth),Outer tips of gear teeth,,,Diameter,Dimension,unspecified,30.39,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 2,,,,,,Gear Reference Radius (likely Pitch Radius),Associated with the gear teeth profile,,,Radius,Dimension,unspecified,12.85,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 3,,,,,,Gear Tooth Root Fillet Radius,Fillet at the root of the gear teeth,,,Radius,Dimension,unspecified,1.67,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 4,,,,,,Gear Tooth Tip Fillet Radius,Fillet at the tip of the gear teeth,,,Radius,Dimension,unspecified,0.4,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 5,,,,,,Gear Tooth Thickness,Measured across a single tooth,,,Linear,Dimension,unspecified,0.09,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 6,,,,,,Tooth Angle,Angle between a tooth flank and a reference line,,,Angular,Dimension,degrees,9,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 7,,,,,,Hub Outer Diameter,Outer diameter of the central hub,,,Diameter,Dimension,unspecified,2,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 8,,,,,,Bore Diameter,Inner diameter of the central bore,,,Diameter,Dimension,unspecified,1,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 9,,,,0.06,0.12,,Cutout in the central bore,0.12x0.06 Keyway,,Keyway,Feature,unspecified,,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 10,,,,,,Bore Transition Radius,Radius at the transition from the bore to the larger hub diameter,,,Radius,Dimension,unspecified,0.06,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 11,,,,,,Internal Recess/Counterbore Diameter,Diameter of the internal recess within the hub,,,Diameter,Dimension,unspecified,0.5,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views Item 1,,"Front view of the gear, showing tooth profile, hub, bore, and keyway.",,,,,,,,,,,,,Top View
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 1,,,,,,,Below the section view,,10:1,Section Label,Annotation,,A-A,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 2,,,,,,Overall Thickness/Width,Overall height/thickness of the gear,,,Linear,Dimension,unspecified,1,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 3,,,,,,Internal Recess Depth,Depth of the internal recess/counterbore,,,Linear,Dimension,unspecified,0.25,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views_elements Item 4,,,,,,Internal Recess Bottom Corner Radius,Radius at the bottom corner of the internal recess,,,Radius,Dimension,unspecified,0.13,,
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views Item 2,,"Cross-sectional view of the gear, showing thickness and internal features.",,,,,,,,,,,,10:1,Section View A-A
+085099a7-e7b4-4a05-9470-96cc63f20d4e_new4.PNG,drawing_analysis_views Item 3,,3D representation of the gear.,,,,,,,,,,,,,Isometric View

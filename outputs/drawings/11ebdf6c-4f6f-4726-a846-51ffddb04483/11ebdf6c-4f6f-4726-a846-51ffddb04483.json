@@ -1,0 +1,129 @@
+{
+  "task_id": "11ebdf6c-4f6f-4726-a846-51ffddb04483",
+  "filename": "11ebdf6c-4f6f-4726-a846-51ffddb04483_new1.PNG",
+  "file_size": 34800,
+  "extracted_data": {
+    "drawing_metadata": {
+      "title": "Engineering Profile Drawing",
+      "description": "2D profile of an irregular shape with a central slot and various radii.",
+      "units": "unspecified"
+    },
+    "geometric_features": [
+      {
+        "feature_id": "F1",
+        "type": "Outline Profile",
+        "description": "The main outer boundary of the part, defined by a series of tangent radii.",
+        "elements": [
+          {
+            "element_type": "Radius",
+            "value": 5.77,
+            "unit": "unspecified",
+            "location_description": "Top-right curve of the profile."
+          },
+          {
+            "element_type": "Radius",
+            "value": 30.0,
+            "unit": "unspecified",
+            "location_description": "Mid-right curve of the profile."
+          },
+          {
+            "element_type": "Radius",
+            "value": 8.25,
+            "unit": "unspecified",
+            "location_description": "Bottom-right curve of the profile."
+          },
+          {
+            "element_type": "Radius",
+            "value": 4.0,
+            "unit": "unspecified",
+            "location_description": "Mid-left inward curve of the profile."
+          }
+        ]
+      },
+      {
+        "feature_id": "F2",
+        "type": "Slot",
+        "description": "A vertical slot feature located in the upper central portion of the profile.",
+        "elements": [
+          {
+            "element_type": "Radius",
+            "value": 0.68,
+            "unit": "unspecified",
+            "quantity": 2,
+            "location_description": "Radius of the two semicircular ends of the slot.",
+            "note": "The '2x' prefix indicates that both ends of the slot have this radius. If this defines the slot width, the width would be 2 * 0.68 = 1.36."
+          },
+          {
+            "element_type": "Linear Dimension",
+            "value": 0.93,
+            "unit": "unspecified",
+            "orientation": "Horizontal",
+            "location_description": "Distance from the main vertical centerline to the rightmost vertical tangent line of the slot.",
+            "note": "This dimension implies a total slot width of 2 * 0.93 = 1.86. This value appears to contradict the width implied by the '2xR0.68' end radii if the slot is a standard 'pill' shape (where width = 2R). This suggests the slot has parallel straight sections with a width of 1.86, and the ends are rounded with R0.68, which is geometrically inconsistent as the radius of the ends should match half the slot width."
+          }
+        ],
+        "positioning_dimensions": [
+          {
+            "dimension_type": "Linear",
+            "value": 4.3,
+            "unit": "unspecified",
+            "orientation": "Vertical",
+            "location_description": "Distance from a horizontal reference line (passing below the slot) to the top tangent point of the slot."
+          }
+        ]
+      }
+    ],
+    "dimensional_information": [
+      {
+        "dimension_id": "D1",
+        "type": "Linear",
+        "value": 15.96,
+        "unit": "unspecified",
+        "orientation": "Vertical",
+        "location_description": "Overall vertical dimension from the bottom horizontal centerline to the top horizontal line (tangent to the R30.00 curve)."
+      },
+      {
+        "dimension_id": "D2",
+        "type": "Linear",
+        "value": 8.25,
+        "unit": "unspecified",
+        "orientation": "Vertical",
+        "location_description": "Vertical dimension from the bottom horizontal centerline to a horizontal line above it (tangent to the R8.25 curve)."
+      },
+      {
+        "dimension_id": "D3",
+        "type": "Linear",
+        "value": 5.25,
+        "unit": "unspecified",
+        "orientation": "Vertical",
+        "location_description": "Vertical dimension from the bottom horizontal centerline to a horizontal line below the R4.00 feature."
+      },
+      {
+        "dimension_id": "D4",
+        "type": "Linear",
+        "value": 3.2,
+        "unit": "unspecified",
+        "orientation": "Horizontal",
+        "location_description": "Horizontal dimension from the main vertical centerline to a vertical line on the left (tangent to the R4.00 feature)."
+      }
+    ],
+    "reference_elements": [
+      {
+        "element_type": "Centerline",
+        "orientation": "Vertical",
+        "location_description": "Main vertical axis, passing through the center of the slot and the bottommost point of the profile."
+      },
+      {
+        "element_type": "Centerline",
+        "orientation": "Horizontal",
+        "location_description": "Multiple horizontal reference lines used for vertical dimensioning, including one at the bottom of the profile and one below the slot."
+      },
+      {
+        "element_type": "Center Mark",
+        "location_description": "A cross symbol (+) on the left side of the profile, indicating a reference point or center for the R4.00 curve."
+      }
+    ]
+  },
+  "status": "completed",
+  "timestamp": "2025-08-08T12:44:30.066312"
+}

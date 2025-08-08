@@ -1,0 +1,336 @@
+{
+  "task_id": "30bc4ad7-634c-43df-b857-53d394565979",
+  "filename": "30bc4ad7-634c-43df-b857-53d394565979_image (3).jpg",
+  "file_size": 87284,
+  "extracted_data": {
+    "drawing_title": "Spur Gear",
+    "component_type": "Spur Gear",
+    "revision_history": [
+      {
+        "zone": "1",
+        "revision": "A",
+        "description": "RELEASE FOR PRODUCTION",
+        "date": "01/24/12",
+        "approved_by": "Instructor"
+      }
+    ],
+    "title_block": {
+      "drawn_by": "Jonas Bonnett",
+      "drawn_date": "2/7/2012",
+      "checked_date": "02/07/12",
+      "qa": null,
+      "mfg": null,
+      "approved": null,
+      "company_project": "J=DOGG ROCKSTAR COR.",
+      "title": "Spur Gear",
+      "size": "A",
+      "drawing_number": "1",
+      "revision": "A",
+      "scale": "1:1",
+      "weight": {
+        "value": 0.607,
+        "unit": "lbs"
+      },
+      "sheet_info": "1 OF 1"
+    },
+    "views": [
+      {
+        "view_name": "Front View",
+        "view_type": "Orthographic",
+        "dimensions": [
+          {
+            "type": "angular",
+            "value": 59,
+            "unit": "degrees",
+            "location": "top-left, angle of central star feature"
+          },
+          {
+            "type": "linear",
+            "value": 0.42,
+            "unit": "inches",
+            "location": "bottom, from center vertical axis to tooth valley"
+          },
+          {
+            "type": "linear",
+            "value": 0.28,
+            "unit": "inches",
+            "location": "left, from center horizontal axis to top of tooth"
+          },
+          {
+            "type": "linear",
+            "value": 0.27,
+            "unit": "inches",
+            "location": "right, from center horizontal axis to bottom of tooth"
+          },
+          {
+            "type": "linear",
+            "value": 0.31,
+            "unit": "inches",
+            "location": "top-left, tooth root feature",
+            "notes": "appears twice, also top-right"
+          },
+          {
+            "type": "linear",
+            "value": 0.1,
+            "unit": "inches",
+            "location": "top-center, inner star feature"
+          },
+          {
+            "type": "linear",
+            "value": 0.05,
+            "unit": "inches",
+            "location": "top-center, inner star feature"
+          },
+          {
+            "type": "linear",
+            "value": 0.06,
+            "unit": "inches",
+            "location": "top-center, inner star feature"
+          },
+          {
+            "type": "diameter",
+            "value": 0.4,
+            "unit": "inches",
+            "location": "top-left, hole feature",
+            "symbol": "flat"
+          },
+          {
+            "type": "diameter",
+            "value": 0.88,
+            "unit": "inches",
+            "location": "top-left, hole feature"
+          },
+          {
+            "type": "diameter",
+            "value": 0.5,
+            "unit": "inches",
+            "location": "top-right, hole feature"
+          },
+          {
+            "type": "diameter",
+            "value": 1.3,
+            "unit": "inches",
+            "location": "top-right, circular feature"
+          },
+          {
+            "type": "diameter",
+            "value": 1.18,
+            "unit": "inches",
+            "location": "top-right, circular feature"
+          },
+          {
+            "type": "diameter",
+            "value": 0.95,
+            "unit": "inches",
+            "location": "bottom-right, circular feature",
+            "notes": "appears twice, also bottom-left"
+          },
+          {
+            "type": "diameter",
+            "value": 2.07,
+            "unit": "inches",
+            "location": "bottom-left, circular feature"
+          },
+          {
+            "type": "diameter",
+            "value": 2.0,
+            "unit": "inches",
+            "location": "bottom-right, outer gear diameter"
+          }
+        ],
+        "geometric_features": [
+          {
+            "type": "hole_pattern",
+            "description": "6 holes equally spaced around center",
+            "associated_dimensions": [
+              {
+                "value": 0.88,
+                "unit": "inches",
+                "type": "diameter"
+              },
+              {
+                "value": 0.5,
+                "unit": "inches",
+                "type": "diameter"
+              },
+              {
+                "value": 1.3,
+                "unit": "inches",
+                "type": "diameter"
+              },
+              {
+                "value": 1.18,
+                "unit": "inches",
+                "type": "diameter"
+              },
+              {
+                "value": 0.95,
+                "unit": "inches",
+                "type": "diameter"
+              }
+            ]
+          },
+          {
+            "type": "central_feature",
+            "description": "Star-shaped central feature"
+          },
+          {
+            "type": "gear_teeth",
+            "description": "External gear teeth"
+          }
+        ]
+      },
+      {
+        "view_name": "SECTION A-A",
+        "view_type": "Sectional",
+        "scale": "1 : 1",
+        "dimensions": [
+          {
+            "type": "linear",
+            "value": 0.18,
+            "unit": "inches",
+            "location": "top-left, thickness of outer rim"
+          },
+          {
+            "type": "linear",
+            "value": 0.13,
+            "unit": "inches",
+            "location": "top-right, thickness of inner rim",
+            "notes": "appears twice, also bottom-right"
+          },
+          {
+            "type": "linear",
+            "value": 0.5,
+            "unit": "inches",
+            "location": "top-center, overall thickness of a section step"
+          },
+          {
+            "type": "linear",
+            "value": 0.38,
+            "unit": "inches",
+            "location": "top-left, thickness of hub step"
+          },
+          {
+            "type": "linear",
+            "value": 0.75,
+            "unit": "inches",
+            "location": "mid-left, width of central hub feature"
+          },
+          {
+            "type": "linear",
+            "value": 0.16,
+            "unit": "inches",
+            "location": "bottom-left, thickness of hub step"
+          },
+          {
+            "type": "linear",
+            "value": 0.46,
+            "unit": "inches",
+            "location": "bottom-right, thickness of inner rim step"
+          },
+          {
+            "type": "linear",
+            "value": 0.53,
+            "unit": "inches",
+            "location": "bottom-right, thickness of outer rim step"
+          },
+          {
+            "type": "linear",
+            "value": 0.875,
+            "unit": "inches",
+            "location": "bottom, overall width/length of the part"
+          },
+          {
+            "type": "diameter",
+            "value": 0.49,
+            "unit": "inches",
+            "location": "mid-left, bore diameter"
+          },
+          {
+            "type": "diameter",
+            "value": 0.95,
+            "unit": "inches",
+            "location": "mid-left, diameter of central hub step",
+            "notes": "appears twice, also mid-right"
+          },
+          {
+            "type": "diameter",
+            "value": 2.89,
+            "unit": "inches",
+            "location": "mid-right, diameter of central body"
+          },
+          {
+            "type": "diameter",
+            "value": 0.125,
+            "unit": "inches",
+            "location": "mid-right, diameter of small bore/hole"
+          },
+          {
+            "type": "diameter",
+            "value": 3.1,
+            "unit": "inches",
+            "location": "right, overall diameter of the part"
+          }
+        ]
+      }
+    ],
+    "specification_tables": [
+      {
+        "table_name": "TABLE",
+        "data": [
+          {
+            "parameter": "No. of Teeth",
+            "value_as_shown": "60",
+            "value_numeric": 60,
+            "unit": null
+          },
+          {
+            "parameter": "Pitch Dia.",
+            "value_as_shown": "3\"",
+            "value_numeric": 3.0,
+            "unit": "inches"
+          },
+          {
+            "parameter": "Hub Dia.",
+            "value_as_shown": "2\"",
+            "value_numeric": 2.0,
+            "unit": "inches"
+          },
+          {
+            "parameter": "OD",
+            "value_as_shown": "3.10\"",
+            "value_numeric": 3.1,
+            "unit": "inches"
+          },
+          {
+            "parameter": "O'all",
+            "value_as_shown": "7/8\"",
+            "value_numeric": 0.875,
+            "unit": "inches"
+          },
+          {
+            "parameter": "Bore min.",
+            "value_as_shown": "3/8\"",
+            "value_numeric": 0.375,
+            "unit": "inches"
+          },
+          {
+            "parameter": "Bore max",
+            "value_as_shown": "1 1/4\"",
+            "value_numeric": 1.25,
+            "unit": "inches"
+          }
+        ]
+      }
+    ],
+    "general_notes": [],
+    "drawing_zones": [
+      "A",
+      "B",
+      "1",
+      "2"
+    ]
+  },
+  "status": "completed",
+  "timestamp": "2025-08-08T13:10:08.961707"
+}
