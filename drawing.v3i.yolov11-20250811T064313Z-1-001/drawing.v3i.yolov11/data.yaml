@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 14
+names: ['Detail view', 'Front view', 'Isometric view', 'Sectional view', 'Table 1', 'Table 2', 'Table 3', 'Table 4', 'Top view', 'text1', 'text2', 'text3', 'text4', 'text5']
+
+roboflow:
+  workspace: gear-ulitx
+  project: drawing-gpc4l
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/gear-ulitx/drawing-gpc4l/dataset/3
