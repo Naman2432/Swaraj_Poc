@@ -108,6 +108,8 @@ class TechnicalDrawingExtractionService:
             - Don't summarize - include all raw data
             - Maintain absolute accuracy - don't modify any values
             - Focus only on technical content - ignore decorative elements
+
+            
             """
             
             uploaded_file = await self.upload_image_to_gemini(image_path)
