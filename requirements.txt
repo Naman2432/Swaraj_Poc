@@ -1,0 +1,6 @@
+pymupdf 
+sentence-transformers 
+torch 
+torchvision 
+pymilvus 
+pillow
