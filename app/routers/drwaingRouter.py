@@ -7,7 +7,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks,
 from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel
 from pathlib import Path
-
+from app.schemas.drawingSchema import DrawingProcessingResult, DrawingProcessingStatus, DrawingUploadResponse, ErrorResponse
 from app.service.techinalDrawingService import TechnicalDrawingExtractionService
 from app.log.logger import get_logger
 
@@ -29,37 +29,6 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Pydantic models
-class DrawingUploadResponse(BaseModel):
-    task_id: str
-    filename: str
-    file_size: int
-    status: str
-    message: str
-
-class DrawingProcessingStatus(BaseModel):
-    task_id: str
-    filename: str
-    status: str
-    created_at: str
-    updated_at: Optional[str] = None
-    file_size: int
-    output_path: Optional[str] = None
-
-class DrawingProcessingResult(BaseModel):
-    task_id: str
-    filename: str
-    status: str
-    file_size: int
-    has_errors: bool
-    json_path: Optional[str] = None
-    csv_path: Optional[str] = None
-    extracted_data: Optional[dict] = None
-
-class ErrorResponse(BaseModel):
-    error: str
-    error_type: str
-    task_id: Optional[str] = None
 
 def validate_image_file(file: UploadFile) -> bool:
     """Validate uploaded image file"""

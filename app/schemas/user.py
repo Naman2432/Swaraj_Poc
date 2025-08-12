@@ -1,1 +1,0 @@
-# Defines schemas for users.
