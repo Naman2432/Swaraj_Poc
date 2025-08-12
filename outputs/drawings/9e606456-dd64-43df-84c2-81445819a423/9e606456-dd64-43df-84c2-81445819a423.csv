@@ -1,0 +1,2 @@
+Filename,Record_Type,error,token_usage_input_tokens_image_tokens,token_usage_input_tokens_prompt_tokens,token_usage_input_tokens_total_input_tokens,token_usage_output_tokens,token_usage_token_counting_method,token_usage_total_tokens
+9e606456-dd64-43df-84c2-81445819a423_image (6).jpg,General,Invalid JSON response from AI model: Expecting value: line 1 column 1 (char 0),516,2058,2574,2291,gemini_api_with_estimation_fallback,4865

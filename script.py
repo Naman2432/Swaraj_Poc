@@ -538,3 +538,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#  python script.py --image "D:\Invoice NTZ\InvoiceStructure\uploads\drawings\hq720.jpg" --outdir "D:\Invoice NTZ\InvoiceStructure\uploads"
