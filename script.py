@@ -8,8 +8,8 @@ from typing import List, Tuple, Dict, Optional
 from pathlib import Path
 import cv2
 import numpy as np
-import pytesseract
-from pytesseract import Output
+import pytesseract # type: ignore
+from pytesseract import Output # type: ignore
 pytesseract.pytesseract.tesseract_cmd = r'C:/py-ocr/tesseract.exe'
 
 # If tesseract is not on PATH, uncomment and set your path:
