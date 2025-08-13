@@ -1,6 +1,8 @@
+
+
 {
-  "task_id": "61a66d58-5ad6-4831-a88b-376da92fd709",
-  "filename": "61a66d58-5ad6-4831-a88b-376da92fd709_image (6).jpg",
+  "task_id": "af01ba83-da69-4aca-ae93-b0bac7a56426",
+  "filename": "af01ba83-da69-4aca-ae93-b0bac7a56426_image (6).jpg",
   "file_size": 51209,
   "extracted_data": {
     "drawing_metadata": {
@@ -470,5 +472,8 @@
     }
   },
   "status": "completed",
-  "timestamp": "2025-08-12T11:58:18.905242"
+  "timestamp": "2025-08-13T12:14:36.732208"
 }
+
+
+"gemini"

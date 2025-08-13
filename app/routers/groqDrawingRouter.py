@@ -5,25 +5,22 @@ from datetime import datetime
 from typing import Optional, List
 from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Query
 from fastapi.responses import JSONResponse, FileResponse
-from pydantic import BaseModel
 from pathlib import Path
 from app.schemas.drawingSchema import DrawingProcessingResult, DrawingProcessingStatus, DrawingUploadResponse, ErrorResponse
-from app.service.techinalDrawingService import TechnicalDrawingExtractionService
+from app.service.groqDrawingService import GroqTechnicalDrawingExtractionService
 from app.log.logger import get_logger
 
 logger = get_logger(__name__)
 
-# Initialize router
-router = APIRouter(prefix="/api/google", tags=["GOOGLE Technical Drawings"])
+router = APIRouter(prefix="/api/groq", tags=[" GROQ Technical Drawings"])
 
-# Initialize service (no database required)
-drawing_service = TechnicalDrawingExtractionService()
+drawing_service = GroqTechnicalDrawingExtractionService()
 
 # Configuration
 UPLOAD_DIR = "uploads/drawings"
 OUTPUT_DIR = "outputs/drawings"
 ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".webp"}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+MAX_FILE_SIZE = 10 * 1024 * 1024 
 
 # Ensure directories exist
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -37,7 +34,6 @@ def validate_image_file(file: UploadFile) -> bool:
     if file_ext not in ALLOWED_EXTENSIONS:
         return False
     
-    # Check file size (this is approximate since we haven't read the file yet)
     if hasattr(file, 'size') and file.size > MAX_FILE_SIZE:
         return False
     
@@ -69,10 +65,8 @@ async def upload_technical_drawing(
                 detail=f"Invalid file. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}. Max size: {MAX_FILE_SIZE/1024/1024}MB"
             )
         
-        # Generate task ID
         task_id = str(uuid.uuid4())
         
-        # Read file content
         content = await file.read()
         file_size = len(content)
         
@@ -82,15 +76,12 @@ async def upload_technical_drawing(
                 detail=f"File too large. Maximum size allowed: {MAX_FILE_SIZE/1024/1024}MB"
             )
         
-        # Save uploaded file
         file_path = os.path.join(UPLOAD_DIR, f"{task_id}_{file.filename}")
         with open(file_path, "wb") as f:
             f.write(content)
         
-        # Create output directory for this task
         task_output_dir = os.path.join(OUTPUT_DIR, task_id)
         
-        # Add background task for processing
         background_tasks.add_task(
             process_drawing_background,
             task_id,
@@ -158,7 +149,6 @@ async def get_processing_result(
         if file_info["status"] == "processing":
             raise HTTPException(status_code=202, detail="Processing still in progress")
         
-        # Try to read the JSON result file
         json_path = f"{file_info['output_path']}.json"
         csv_path = f"{file_info['output_path']}.csv"
         
@@ -270,7 +260,6 @@ async def list_processed_drawings(
                     output_path=file_info.get("output_path")
                 ))
         
-        # Sort by creation time (newest first) and limit
         file_list.sort(key=lambda x: x.created_at, reverse=True)
         return file_list[:limit]
         
@@ -289,9 +278,8 @@ async def delete_processed_drawing(task_id: str):
         if not file_info:
             raise HTTPException(status_code=404, detail="Task not found")
         
-        # Delete files
         files_to_delete = [
-            file_info["file_path"],  # Original uploaded file
+            file_info["file_path"],  
             f"{file_info['output_path']}.json",
             f"{file_info['output_path']}.csv"
         ]
@@ -301,15 +289,13 @@ async def delete_processed_drawing(task_id: str):
                 os.remove(file_path)
                 logger.info(f"Deleted file: {file_path}")
         
-        # Delete output directory if empty
         output_dir = os.path.dirname(file_info['output_path'])
         try:
             if os.path.exists(output_dir) and not os.listdir(output_dir):
                 os.rmdir(output_dir)
         except OSError:
-            pass  # Directory not empty or other issue, ignore
+            pass  
         
-        # Remove from memory
         drawing_service.delete_file_info(task_id)
         
         return {"message": f"Technical drawing {task_id} deleted successfully"}
@@ -357,7 +343,7 @@ async def batch_upload_drawings(
     Upload multiple technical drawings for batch processing
     """
     try:
-        if len(files) > 10:  # Limit batch size
+        if len(files) > 10: 
             raise HTTPException(
                 status_code=400,
                 detail="Maximum 10 files allowed in batch upload"
@@ -367,7 +353,7 @@ async def batch_upload_drawings(
         
         for file in files:
             try:
-                # Validate each file
+
                 if not validate_image_file(file):
                     responses.append(DrawingUploadResponse(
                         task_id="",
@@ -378,10 +364,10 @@ async def batch_upload_drawings(
                     ))
                     continue
                 
-                # Generate task ID
+
                 task_id = str(uuid.uuid4())
                 
-                # Read file content
+ 
                 content = await file.read()
                 file_size = len(content)
                 
@@ -395,15 +381,15 @@ async def batch_upload_drawings(
                     ))
                     continue
                 
-                # Save uploaded file
+          
                 file_path = os.path.join(UPLOAD_DIR, f"{task_id}_{file.filename}")
                 with open(file_path, "wb") as f:
                     f.write(content)
                 
-                # Create output directory for this task
+              
                 task_output_dir = os.path.join(OUTPUT_DIR, task_id)
                 
-                # Add background task for processing
+                
                 background_tasks.add_task(
                     process_drawing_background,
                     task_id,
@@ -419,7 +405,7 @@ async def batch_upload_drawings(
                     message="File uploaded successfully and is being processed"
                 ))
                 
-                # Reset file pointer for next iteration
+             
                 await file.seek(0)
                 
             except Exception as e:
@@ -492,13 +478,10 @@ async def reprocess_drawing(task_id: str, background_tasks: BackgroundTasks):
         if not os.path.exists(file_info["file_path"]):
             raise HTTPException(status_code=404, detail="Original file not found")
         
-        # Update status to processing
         drawing_service.update_file_status(task_id, "processing")
         
-        # Create output directory for this task
         task_output_dir = os.path.join(OUTPUT_DIR, task_id)
         
-        # Add background task for reprocessing
         background_tasks.add_task(
             process_drawing_background,
             task_id,

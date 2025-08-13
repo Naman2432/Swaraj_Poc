@@ -2235,3 +2235,4 @@ class TechnicalDrawingExtractionService:
             lines.append("")
         
         return "\n".join(lines)
+
