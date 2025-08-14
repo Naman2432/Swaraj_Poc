@@ -48,8 +48,7 @@ class GroqTechnicalDrawingExtractionService:
             if not text:
                 return 0
             
-            # Groq doesn't have a direct token counting API like Gemini
-            # Using estimation method
+        
             return self.estimate_tokens(text)
             
         except Exception as e:
@@ -91,7 +90,6 @@ class GroqTechnicalDrawingExtractionService:
                 
             pixels = width * height
             
-            # Groq vision model token estimation (adjusted for Groq's patterns)
             if pixels <= 512 * 512:
                 return 300  
             elif pixels <= 1024 * 1024:
@@ -131,11 +129,9 @@ class GroqTechnicalDrawingExtractionService:
             with open(image_path, "rb") as image_file:
                 encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
             
-            # Get image format for proper MIME type
             with Image.open(image_path) as img:
                 image_format = img.format.lower()
             
-            # Create data URL
             mime_type = f"image/{image_format}" if image_format in ['jpeg', 'jpg', 'png', 'gif', 'webp'] else "image/jpeg"
             data_url = f"data:{mime_type};base64,{encoded_string}"
             
@@ -404,10 +400,8 @@ class GroqTechnicalDrawingExtractionService:
             input_token_info = self.count_total_tokens_for_request(PROMPT, image_path)
             logger.info(f"Input tokens - Prompt: {input_token_info['prompt_tokens']}, Image: {input_token_info['image_tokens']}, Total: {input_token_info['total_input_tokens']}")
             
-            # Encode image to base64
             image_data_url = await self.upload_image_to_gemini(image_path)
             
-            # Create messages for Groq API
             messages = [
                 {
                     "role": "user",
@@ -426,9 +420,8 @@ class GroqTechnicalDrawingExtractionService:
                 }
             ]
             
-            # Make API call to Groq
             response = client.chat.completions.create(
-                model="meta-llama/llama-4-scout-17b-16e-instruct",  # or "llama-3.2-11b-vision-preview"
+                model="meta-llama/llama-4-scout-17b-16e-instruct", 
                 messages=messages,
                 temperature=0.0,
                 max_tokens=8000
@@ -436,13 +429,11 @@ class GroqTechnicalDrawingExtractionService:
             
             response_text = response.choices[0].message.content.strip()
             
-            # Extract token usage from response
             output_tokens = getattr(response.usage, 'completion_tokens', 0) if hasattr(response, 'usage') else self.count_tokens_accurate(response_text)
             total_tokens = input_token_info['total_input_tokens'] + output_tokens
             
             logger.info(f"Token usage - Input: {input_token_info['total_input_tokens']}, Output: {output_tokens}, Total: {total_tokens}")
             
-            # Clean up JSON formatting
             if response_text.startswith("```json"):
                 response_text = response_text[7:-3].strip()
             elif response_text.startswith("```"):
