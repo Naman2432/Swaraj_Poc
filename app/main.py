@@ -1,4 +1,4 @@
-# Initializes the FastAPI application.
+
 from fastapi import FastAPI
 
 from app.routers import drwaingRouter, groqDrawingRouter
