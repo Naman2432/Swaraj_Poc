@@ -694,14 +694,19 @@ import uuid
 import shutil
 from datetime import datetime
 from typing import Optional, List
-from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Query, Depends
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Query, Depends,status
 from fastapi.responses import  FileResponse
 from pathlib import Path
+
+from requests import Session
 from app.schemas.drawingSchema import DrawingProcessingResult, DrawingProcessingStatus, DrawingUploadResponse
 from app.service.techinalDrawingService import TechnicalDrawingExtractionService
 from app.log.logger import get_logger
 from app.database.db import get_db
- 
+from typing import Optional, Tuple
+
+
+
 logger = get_logger(__name__)
  
 # Initialize router
@@ -714,7 +719,7 @@ drawing_service = TechnicalDrawingExtractionService()
 UPLOAD_DIR = "uploads/drawings"
 OUTPUT_DIR = "outputs/drawings"
 ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg"}
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 10MB
+MAX_FILE_SIZE = 5 * 1024 * 1024  
 MIN_FILE_SIZE = 1 * 1024 * 1024
  
 # Ensure directories exist
@@ -722,24 +727,15 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
  
  
- 
-def validate_image_file(file: UploadFile) -> tuple[bool, Optional[str]]:
-    """Validate uploaded image file and return (is_valid, error_message)"""
+def validate_image_file(file: UploadFile) -> Tuple[bool, Optional[str]]:
+    """Validate uploaded image file (only checks filename and extension)"""
     if not file.filename:
         return False, "No filename provided"
-       
-    # Check file extension
+    
     file_ext = Path(file.filename).suffix.lower()
     if file_ext not in ALLOWED_EXTENSIONS:
-        return False, f"Invalid file format. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}"
-   
-    # Check file size
-    if hasattr(file, 'size'):
-        if file.size < MIN_FILE_SIZE:
-            return False, f"File too small. Minimum size: {MIN_FILE_SIZE/1024/1024}MB"
-        if file.size > MAX_FILE_SIZE:
-            return False, f"File too large. Maximum size: {MAX_FILE_SIZE/1024/1024}MB"
-   
+        return False, f"Invalid file format. Allowed: {', '.join(ALLOWED_EXTENSIONS)}"
+    
     return True, None
  
 async def process_drawing_background(task_id: str, file_path: str, output_dir: str, db):
@@ -752,74 +748,66 @@ async def process_drawing_background(task_id: str, file_path: str, output_dir: s
         logger.error(f"Background processing failed for task {task_id}: {str(e)}")
         drawing_service.update_file_status(task_id, "failed")
  
- 
+
+
 @router.post("/upload", response_model=DrawingUploadResponse)
 async def upload_technical_drawing(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
-    db: Depends = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    """
-    Upload a technical drawing/engineering diagram for processing
-    """
     try:
-        # Validate file
+        # Validate basic file properties
         if not file.filename:
             raise HTTPException(
-                status_code=422,
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail="No filename provided"
             )
-           
+        
         is_valid, error_message = validate_image_file(file)
         if not is_valid:
-            status_code = 415  # Default for format errors
-            if "too small" in error_message.lower() or "too large" in error_message.lower():
-                status_code = 413  # Payload issues
             raise HTTPException(
-                status_code=status_code,
+                status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
                 detail=error_message
             )
-       
-        # Generate task ID
-        task_id = str(uuid.uuid4())
-       
-        # Read file content (still verify size after reading)
+
+        # Read file content and validate size
         content = await file.read()
         file_size = len(content)
-       
+        
         if file_size < MIN_FILE_SIZE:
             raise HTTPException(
-                status_code=413,
+                status_code=status.HTTP_400_BAD_REQUEST, 
                 detail=f"File too small. Minimum size: {MIN_FILE_SIZE/1024/1024}MB"
             )
         if file_size > MAX_FILE_SIZE:
             raise HTTPException(
-                status_code=413,
+                status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"File too large. Maximum size: {MAX_FILE_SIZE/1024/1024}MB"
             )
-       
-        # Save uploaded file
+
+        # Generate unique task ID
+        task_id = str(uuid.uuid4())
         file_path = os.path.join(UPLOAD_DIR, f"{task_id}_{file.filename}")
+
+        # Ensure upload directory exists
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+        # Save file
         try:
             with open(file_path, "wb") as f:
                 f.write(content)
         except IOError as e:
             raise HTTPException(
-                status_code=507,  # Insufficient Storage
+                status_code=status.HTTP_507_INSUFFICIENT_STORAGE,
                 detail=f"Could not save file: {str(e)}"
             )
-       
-        # Create output directory for this task
+
+        # Create output directory
         task_output_dir = os.path.join(OUTPUT_DIR, task_id)
-        try:
-            os.makedirs(task_output_dir, exist_ok=True)
-        except IOError as e:
-            raise HTTPException(
-                status_code=507,  # Insufficient Storage
-                detail=f"Could not create output directory: {str(e)}"
-            )
-       
-        # Add background task for processing
+        os.makedirs(task_output_dir, exist_ok=True)
+
+        # Add background task
         background_tasks.add_task(
             process_drawing_background,
             task_id,
@@ -827,22 +815,25 @@ async def upload_technical_drawing(
             task_output_dir,
             db
         )
-       
-        logger.info(f"Technical drawing uploaded successfully: {file.filename}, Task ID: {task_id}")
-       
+
+        logger.info(f"File uploaded: {file.filename}, Size: {file_size} bytes, Task ID: {task_id}")
+
         return DrawingUploadResponse(
             task_id=task_id,
             filename=file.filename,
             file_size=file_size,
             status="processing",
-            message="Technical drawing uploaded successfully and is being processed"
+            message="File uploaded successfully"
         )
-       
+
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error uploading technical drawing: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+        logger.error(f"Upload error: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="File upload failed"
+        )
  
 @router.get("/status/{task_id}", response_model=DrawingProcessingStatus)
 async def get_processing_status(task_id: str):
