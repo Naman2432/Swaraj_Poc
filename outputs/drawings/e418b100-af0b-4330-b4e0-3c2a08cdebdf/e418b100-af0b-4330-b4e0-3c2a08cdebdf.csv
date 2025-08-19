@@ -1,0 +1,2 @@
+Filename,Record_Type,error,file,token_limit_exceeded,token_usage_error,token_usage_token_counting_method
+e418b100-af0b-4330-b4e0-3c2a08cdebdf_image (7).jpg,General,"Token limit exceeded: 3177 tokens (max allowed: 2000). Breakdown - Prompt: 2661, Image: 516",e418b100-af0b-4330-b4e0-3c2a08cdebdf_image (7).jpg,True,"Token limit exceeded: 3177 tokens (max allowed: 2000). Breakdown - Prompt: 2661, Image: 516",gemini_api_with_estimation_fallback

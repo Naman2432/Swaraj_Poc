@@ -1,0 +1,16 @@
+{
+  "task_id": "e418b100-af0b-4330-b4e0-3c2a08cdebdf",
+  "filename": "e418b100-af0b-4330-b4e0-3c2a08cdebdf_image (7).jpg",
+  "file_size": 1063980,
+  "extracted_data": {
+    "error": "Token limit exceeded: 3177 tokens (max allowed: 2000). Breakdown - Prompt: 2661, Image: 516",
+    "token_limit_exceeded": true,
+    "file": "e418b100-af0b-4330-b4e0-3c2a08cdebdf_image (7).jpg",
+    "token_usage": {
+      "error": "Token limit exceeded: 3177 tokens (max allowed: 2000). Breakdown - Prompt: 2661, Image: 516",
+      "token_counting_method": "gemini_api_with_estimation_fallback"
+    }
+  },
+  "status": "completed_with_errors",
+  "timestamp": "2025-08-19T11:31:53.644825"
+}
