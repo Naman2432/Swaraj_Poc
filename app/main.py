@@ -1,6 +1,6 @@
 
 from fastapi import FastAPI
-import os 
+
 from app.routers import drwaingRouter, groqDrawingRouter
 from app.log.logger import setup_logging
 
