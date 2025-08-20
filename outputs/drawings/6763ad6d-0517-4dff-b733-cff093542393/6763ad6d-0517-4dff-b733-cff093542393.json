@@ -1,6 +1,6 @@
 {
-  "task_id": "5792b448-80d5-47f1-b899-60bd8de0a775",
-  "filename": "5792b448-80d5-47f1-b899-60bd8de0a775_image (7).jpg",
+  "task_id": "6763ad6d-0517-4dff-b733-cff093542393",
+  "filename": "6763ad6d-0517-4dff-b733-cff093542393_image.jpeg",
   "file_size": 1063980,
   "extracted_data": {
     "drawing_metadata": {
@@ -437,6 +437,7 @@
         "total_input_tokens": 3177
       },
       "output_tokens": 3431,
+      "output_token_limit": 8000,
       "total_tokens": 6608,
       "token_counting_method": "gemini_api_with_estimation_fallback",
       "image_dimensions": {
@@ -448,5 +449,5 @@
     }
   },
   "status": "completed",
-  "timestamp": "2025-08-19T11:06:56.337720"
+  "timestamp": "2025-08-20T13:02:00.906194"
 }
